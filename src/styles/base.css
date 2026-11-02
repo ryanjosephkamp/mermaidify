@@ -1,0 +1,119 @@
+/* What every page shares under the header: the reset, links, focus, and buttons. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 24px;
+}
+body {
+  margin: 0;
+  font: 400 1.0625rem/1.6 var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+a {
+  color: var(--accent);
+  text-underline-offset: 0.18em;
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+[hidden] {
+  display: none !important;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: absolute;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: var(--bright);
+  color: var(--night);
+  font-weight: 650;
+  text-decoration: none;
+}
+.skip:focus {
+  top: 12px;
+}
+
+/* ─── buttons ────────────────────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  font: 560 0.95rem/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+.btn-primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  padding-inline: 18px;
+}
+.btn-quiet {
+  border-color: transparent;
+  background: transparent;
+  color: var(--ink-2);
+}
+.btn-icon {
+  width: 44px;
+  padding: 0;
+}
+@media (hover: hover) {
+  .btn:not(:disabled):hover {
+    background: var(--surface-2);
+  }
+  .btn-primary:not(:disabled):hover {
+    background: var(--accent);
+    filter: brightness(1.08);
+  }
+}
+.btn:not(:disabled):active {
+  transform: translateY(1px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .btn {
+    transition:
+      background-color 120ms ease-out,
+      border-color 120ms ease-out,
+      filter 120ms ease-out;
+  }
+}

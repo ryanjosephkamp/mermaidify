@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!--doc-head-->
+    <!--site-head:docs-->
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the content</a>
+    <!--site-header:docs-->
+    <main id="main">
+      <!--doc-hero-->
+      <div class="site-wrap page-body has-toc">
+        <!--doc-toc-->
+        <div class="doc">
+          <p>Each stroke arrives from the browser as a list of points, the same for a finger, a pen, or a mouse, with the zoom it was drawn at. The reader is a small module with no dependencies, and it works in five steps. A hand draws the same size on screen at any zoom, so the reader reads a drawing at the size it had on screen as it was drawn: a drawing made zoomed out to 25% reads as the same drawing made at 100%. Sizes on this page are in drawing units: a pixel on screen at the zoom the stroke was drawn at, which is a CSS pixel at 100%. A drawing made at several zooms is read at the zoom most of its strokes were drawn at.</p>
+
+          <h2 id="closed-or-open">1. Closed or open</h2>
+          <p>A stroke whose end comes back to its start, overshoot allowed, is a shape. Open strokes that meet end to end and close up, like a box drawn in four lines, are joined into one shape first. A shape and a line drawn in one stroke, either one first, are both read, and so are two shapes with the line between them: each shape is a loop that closes where the line meets it, and the line is the rest.</p>
+
+          <h2 id="which-shape">2. Which shape</h2>
+          <p>The outline, without any overshoot past its start, is spaced evenly, stretched to a square, and compared with a square, a circle, a diamond, a hexagon, a trapezoid either way up, a parallelogram leaning either way, and a triangle pointing up or down. The nearest wins, and counting sharp corners settles close calls between round shapes and cornered ones. A circle more than about 1.3 times as wide as it is tall is an oval. A box drawn askew, up to about 25 degrees, is turned level and read again, so it stays a box. Triangles, parallelograms, and the trapezoid wide at the top are only read on outlines at least 60 drawing units across, so a small closed arrowhead stays a head.</p>
+
+          <h2 id="inside-and-around">3. Inside and around</h2>
+          <p>A round shape centered inside another makes a double circle. A box centered in a slightly bigger box makes a box in a box. Any other shape drawn around shapes is a group.</p>
+
+          <h2 id="lines-and-heads">4. Lines and heads</h2>
+          <p>An open stroke whose ends reach two shapes is an arrow between them. People stop a line short of the shape they point at, so the end of a line at least 60 units long, not drawn as dashes, that reaches no shape reaches the first one straight ahead of it, within 40% of the line's length and at most 90 units. The arrowhead can be a hook at its tip drawn in the same stroke, one barb out and back through the tip and then the other, with barbs up to half the line's length; a knot of ink filled in at either end of the stroke; or a mark drawn at its end on its own: a "V" of any size with its point at the line's end, or a filled-in head up to 50 drawing units wide. A "V", or a filled or bent mark, drawn a little past a line's free end is its head too, up to half the line's length past it, and the line runs on to its tip. A small closed triangle at the edge of the shape it points to is the head too, not a shape: up to 50 units wide when drawn on its own, or 80 when drawn in the line's stroke. A head at the start turns the arrow around, and heads at both ends make it two-way. A line with no head points the way it was drawn, and a small chevron on the drawing shows which way that was. A line that leaves a shape and comes back is a loop on that shape.</p>
+          <ul>
+            <li><strong>Dotted.</strong> Short, nearly straight strokes, each starting a small gap past the end of the one before and going on the same way, are one line drawn as dashes. The row may turn corners, and its last dash may carry the hook. Dashes in a row that join no shapes are read one by one, as before.</li>
+            <li><strong>Thick.</strong> Two lines between the same two shapes that span about the same distance and stay within 8 drawing units of each other along their middles (up to 10 on a long line) are one line gone over again. Two arrows drawn close together, each with a head pointing the other way, stay two arrows; a line with no head drawn back over an arrow goes over it.</li>
+          </ul>
+
+          <h2 id="mermaid">5. Mermaid</h2>
+          <p>The direction, top to bottom or left to right, comes from how the arrows run. Shapes get letters and first names ("Node 1", "Node 2") in reading order, and the inks become Mermaid styles.</p>
+
+          <!--doc-pager-->
+        </div>
+      </div>
+    </main>
+    <!--site-footer:docs-->
+    <script type="module" src="/src/docs/main.ts"></script>
+  </body>
+</html>

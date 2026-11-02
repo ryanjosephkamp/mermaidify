@@ -1,0 +1,608 @@
+/*
+ * The docs: the night title band with its section chip, the reading column with its contents list and the links to
+ * the pages before and after, and the index's cards. After grooph's document pages (scripts/site/style.css there).
+ */
+
+/* ─── the title band, after Link Meteor's inner pages ───────────────────── */
+
+.page-hero {
+  padding: clamp(36px, 6vw, 80px) 0 clamp(32px, 5vw, 60px);
+  background: var(--night);
+  color: var(--night-ink);
+}
+.page-hero h1 {
+  max-width: 22ch;
+  margin: 0;
+  font-size: clamp(2.1rem, 1.5rem + 2.8vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.page-hero p {
+  max-width: 40em;
+  margin: 16px 0 0;
+  color: var(--night-muted);
+  font-size: clamp(1.08rem, 1rem + 0.35vw, 1.25rem);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.page-hero a {
+  color: var(--night-ink);
+}
+.page-hero img {
+  max-width: 100%;
+  height: auto;
+}
+.page-hero code {
+  padding: 0.1em 0.35em;
+  border-radius: 5px;
+  background: oklch(1 0 0 / 0.1);
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+.page-hero :focus-visible {
+  outline-color: var(--bright);
+}
+/* The section a doc is in, above its title. */
+.page-hero .page-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 18px;
+  padding: 5px 12px 5px 10px;
+  border: 1px solid var(--night-line);
+  border-radius: 999px;
+  color: var(--night-ink);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.page-chip::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bright);
+}
+/* ─── the column, and the contents list beside it ───────────────────────── */
+
+.page-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding: clamp(28px, 5vw, 64px) 0 clamp(56px, 8vw, 104px);
+}
+.toc {
+  padding: 2px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  font-size: 0.94rem;
+}
+.toc summary {
+  padding: 11px 0;
+  cursor: pointer;
+  font-weight: 620;
+}
+.toc ul {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+.toc a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: var(--ink-2);
+  text-decoration: none;
+}
+.toc ul ul {
+  margin: 0 0 4px 12px;
+}
+.toc ul ul a {
+  padding-block: 4px;
+  font-size: 0.9rem;
+}
+.doc {
+  min-width: 0;
+  max-width: 720px;
+}
+.doc-wide {
+  max-width: none;
+}
+.doc > :first-child {
+  margin-top: 0;
+}
+.doc h1,
+.doc h2,
+.doc h3,
+.doc h4,
+.doc h5,
+.doc h6 {
+  scroll-margin-top: 24px;
+  text-wrap: balance;
+}
+.doc h1 {
+  margin: 0 0 0.5em;
+  font-size: clamp(2.1rem, 1.5rem + 2.8vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+.doc h2 {
+  margin: 2em 0 0.6em;
+  padding-top: 1.2em;
+  border-top: 1px solid var(--line);
+  font-size: clamp(1.4rem, 1.2rem + 0.8vw, 1.7rem);
+  font-weight: 650;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+}
+.doc h3 {
+  margin: 1.7em 0 0.5em;
+  font-size: 1.2rem;
+  font-weight: 620;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.doc h4,
+.doc h5,
+.doc h6 {
+  margin: 1.5em 0 0.4em;
+  font-size: 1.0625rem;
+  font-weight: 620;
+}
+.doc > h2:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.doc .anchor {
+  margin-left: 0.35em;
+  color: var(--ink-3);
+  font-weight: 500;
+  text-decoration: none;
+  opacity: 0;
+}
+.doc h2:hover .anchor,
+.doc h3:hover .anchor,
+.doc h4:hover .anchor,
+.doc .anchor:focus-visible {
+  opacity: 1;
+}
+@media (hover: none) {
+  .doc .anchor {
+    opacity: 0.4;
+  }
+}
+.doc p {
+  margin: 0 0 1em;
+  text-wrap: pretty;
+}
+.doc a {
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  overflow-wrap: anywhere;
+}
+.doc a:hover {
+  text-decoration-color: currentColor;
+}
+.doc a.anchor {
+  text-decoration: none;
+}
+.doc ul,
+.doc ol {
+  margin: 0 0 1em;
+  padding-left: 1.4em;
+}
+.doc li {
+  margin: 0.3em 0;
+  padding-left: 0.1em;
+  overflow-wrap: anywhere;
+}
+.doc li::marker {
+  color: var(--ink-3);
+}
+.doc li > ul,
+.doc li > ol {
+  margin: 0.3em 0 0.4em;
+}
+.doc li.task {
+  list-style: none;
+  margin-left: -1.2em;
+}
+.doc li.task input {
+  margin: 0 0.5em 0 0;
+}
+.doc strong {
+  font-weight: 650;
+}
+.doc hr {
+  margin: 2.2em 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.doc blockquote {
+  margin: 0 0 1em;
+  padding: 0 0 0 14px;
+  border-left: 3px solid var(--line-strong);
+  color: var(--ink-2);
+}
+.doc blockquote > :last-child {
+  margin-bottom: 0;
+}
+.doc .alert {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.doc .alert-warning,
+.doc .alert-caution {
+  border-left-color: var(--warning);
+  background: var(--warning-soft);
+}
+.doc .alert-caution {
+  border-left-color: var(--error);
+  background: var(--error-soft);
+}
+.doc .alert-title {
+  margin-bottom: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.doc img,
+.doc svg,
+.doc video {
+  max-width: 100%;
+  height: auto;
+}
+.doc img {
+  border-radius: 8px;
+}
+.doc picture,
+.doc iframe {
+  max-width: 100%;
+}
+/* A long picture shown by its shorter view, which opens the whole one (scripts/site-pages.mjs). */
+.doc a.whole {
+  display: inline-block;
+}
+.doc a.whole span {
+  display: block;
+  font-size: 0.88rem;
+}
+.doc iframe {
+  margin: 0 0 1em;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.doc details {
+  margin: 0 0 1em;
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.doc summary {
+  cursor: pointer;
+  font-weight: 620;
+}
+.doc kbd {
+  padding: 0.05em 0.4em;
+  border: 1px solid var(--line-strong);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  font: 600 0.82em var(--font);
+}
+
+/* code */
+.doc code {
+  padding: 0.1em 0.35em;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background: var(--surface-2);
+  font-family: var(--mono);
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+.doc .code {
+  margin: 0 0 1.1em;
+  border-radius: var(--radius-lg);
+  background: var(--night);
+  color: var(--night-ink);
+  overflow: hidden;
+}
+.doc .code pre {
+  margin: 0;
+  padding: 14px 18px;
+  overflow-x: auto;
+  font: 0.86rem/1.6 var(--mono);
+  tab-size: 2;
+}
+.doc .code pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  overflow-wrap: normal;
+}
+.doc .code :focus-visible {
+  outline-color: var(--bright);
+}
+.code-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 6px 2px 18px;
+  border-bottom: 1px solid var(--night-line);
+  color: var(--night-muted);
+  font: 0.78rem/1 var(--mono);
+}
+.code-bar button {
+  min-height: 36px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  color: var(--night-ink);
+  font: 600 0.82rem/1 var(--font);
+  cursor: pointer;
+}
+
+/* tables scroll inside the column, never the page */
+.doc .table-wrap {
+  margin: 0 0 1.1em;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.doc table.wide {
+  min-width: 40em;
+}
+.doc th,
+.doc td {
+  min-width: 7.5em;
+  padding: 9px 12px;
+  border-top: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+.doc thead th {
+  border-top: 0;
+  background: var(--surface-2);
+  font-weight: 620;
+}
+.doc td code,
+.doc th code {
+  font-size: 0.9em;
+  overflow-wrap: normal;
+}
+.doc .al-right {
+  text-align: right;
+}
+.doc .al-center {
+  text-align: center;
+}
+/* Drawings people made, with what was read: the ink over each shape found, tinted, and the arrow read, shaded. */
+.doc .ink-examples {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+  gap: 14px;
+  margin: 0 0 1.1em;
+}
+.doc .ink-examples figure {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.doc .ink-examples svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 230px;
+  margin-bottom: 10px;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.doc .ink-examples svg path {
+  vector-effect: non-scaling-stroke;
+}
+.doc .ink-examples .ink path {
+  stroke: var(--draw-ink);
+  stroke-width: 1.6px;
+}
+.doc .ink-examples .found {
+  fill: var(--accent);
+  stroke: none;
+  opacity: 0.12;
+}
+.doc .ink-examples .read {
+  stroke: var(--accent);
+  stroke-width: 9px;
+  opacity: 0.32;
+}
+.doc .ink-examples figcaption {
+  color: var(--ink-2);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.doc .ink-examples figcaption strong {
+  display: block;
+  color: var(--ink);
+}
+
+/* ─── the index's cards, and the links on at a doc's foot ───────────────── */
+
+.group + .group {
+  margin-top: clamp(36px, 5vw, 56px);
+}
+.doc .group h2 {
+  margin: 0 0 0.7em;
+  padding-top: 0;
+  border-top: 0;
+}
+.doc .cards {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.doc .cards li {
+  margin: 0;
+  padding: 0;
+}
+.doc .card,
+.doc .doc-pager a {
+  display: block;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-color 160ms ease-out;
+}
+.doc .card {
+  padding: 16px 20px 18px;
+}
+.doc .card strong {
+  display: block;
+  font-size: 1.08rem;
+  font-weight: 650;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+.doc .card span {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink-2);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+.doc-pager {
+  display: grid;
+  gap: 12px;
+  margin-top: clamp(40px, 6vw, 64px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.doc .doc-pager a {
+  padding: 12px 16px 14px;
+}
+.doc-pager span {
+  display: block;
+  color: var(--ink-3);
+  font-size: 0.86rem;
+}
+.doc-pager strong {
+  display: block;
+  font-weight: 650;
+  line-height: 1.3;
+}
+.doc-pager .next {
+  text-align: right;
+}
+@media (min-width: 560px) {
+  .doc-pager {
+    grid-template-columns: 1fr 1fr;
+  }
+  .doc-pager .next {
+    grid-column: 2;
+  }
+}
+@media (min-width: 640px) {
+  .doc .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doc .card,
+  .doc .doc-pager a {
+    transition: none;
+  }
+}
+
+@media (hover: hover) {
+  .toc a:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .doc .card:hover,
+  .doc .doc-pager a:hover {
+    border-color: var(--line-strong);
+  }
+  .code-bar button:hover {
+    background: oklch(1 0 0 / 0.1);
+  }
+}
+@media (min-width: 980px) {
+  .page-body.has-toc {
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 72px);
+  }
+  /* The contents list stands beside the column and stays in view. The script opens it at this width. */
+  .toc {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100vh - 48px);
+    padding: 0;
+    overflow-y: auto;
+    border: 0;
+    background: none;
+  }
+  .toc summary {
+    padding: 0 10px 10px;
+    color: var(--ink-3);
+    font-size: 0.86rem;
+    font-weight: 650;
+  }
+  .doc .cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media print {
+  .toc,
+  .code-bar,
+  .doc .anchor,
+  .doc-pager {
+    display: none;
+  }
+  body,
+  .page-hero,
+  .page-hero p,
+  .page-hero a,
+  .doc .code {
+    background: none;
+    color: #000;
+  }
+  .page-hero {
+    padding: 0;
+  }
+  body {
+    font-size: 12pt;
+  }
+}

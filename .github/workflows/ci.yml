@@ -1,0 +1,45 @@
+name: CI
+
+# Pull requests and manual runs only, on Linux; the report is kept only when something fails.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Types
+        run: npm run typecheck
+      - name: Reader tests
+        run: npm test
+      - name: Reader benchmark, held to its floor
+        run: npm run bench -- --floor
+      - name: Reader on drawings people made, held to its floor
+        run: npm run measure -- --floor
+      - name: Build
+        run: npm run build
+      - name: Browser
+        run: npx playwright install --with-deps chromium
+      - name: Pages at a phone's size and a computer's
+        run: npx playwright test
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 3

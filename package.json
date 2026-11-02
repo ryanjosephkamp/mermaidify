@@ -1,0 +1,32 @@
+{
+  "name": "mermaidify",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Sketch a diagram with a finger, a pen, or a mouse, and get the closest Mermaid flowchart.",
+  "license": "MIT",
+  "author": "Ryan Kamp (https://ryanjosephkamp.github.io/)",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "dev": "vite --port 4371 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 4371 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test \"test/**/*.test.ts\"",
+    "bench": "node scripts/bench.ts",
+    "measure": "node scripts/measure.ts",
+    "e2e": "playwright test",
+    "check": "npm run typecheck && npm test && npm run bench -- --floor && npm run measure -- --floor && npm run build && npm run e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  },
+  "dependencies": {
+    "mermaid": "^12.2.0"
+  }
+}

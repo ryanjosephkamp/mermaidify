@@ -1,0 +1,1069 @@
+/*
+ * The Draw page. On a phone: the tools, the drawing nearly a screen tall, what was read, then the diagram, the names,
+ * and the code below. From 1024 px wide the drawing stays on the left and the result reads beside it.
+ */
+
+.studio {
+  display: grid;
+  gap: 20px;
+  width: min(100% - 2 * var(--gutter), 1480px);
+  margin-inline: auto;
+  padding-block: 12px 48px;
+}
+.sketch {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  align-content: start;
+}
+@media (min-width: 1024px) {
+  .studio {
+    grid-template-columns: minmax(0, 1.7fr) minmax(360px, 1fr);
+    align-items: start;
+    padding-top: 18px;
+  }
+  .sketch {
+    position: sticky;
+    top: 12px;
+  }
+}
+
+/* ─── the tools ──────────────────────────────────────────────────────────── */
+
+/*
+ * One quiet bar of icons over the drawing, grouped by thin rules rather than boxes: the tools and the inks, then what
+ * acts on the drawing, then Mermaidify. The chosen tool is drawn in reverse, ink on the page's own color. On a phone
+ * the bar takes two rows and the tools keep their icons, their names going to screen readers and tooltips.
+ */
+.toolbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 14px;
+}
+.tools-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+.tools-row:last-child {
+  flex: 1 1 auto;
+}
+.spacer {
+  flex: 1 1 0;
+}
+.rule {
+  flex: none;
+  width: 1px;
+  height: 20px;
+  margin-inline: 7px;
+  background: var(--line-strong);
+}
+.toolbar svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.toolbar svg circle {
+  fill: currentColor;
+  stroke: none;
+}
+
+.seg {
+  display: inline-flex;
+  flex: none;
+  gap: 2px;
+}
+.seg button,
+.toolbar .btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-width: 40px;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 11px 0 10px;
+  border: 0;
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink-2);
+  font: 600 0.9rem/1 var(--font);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.toolbar .btn-icon {
+  width: 40px;
+  padding: 0;
+}
+.seg button svg,
+.toolbar .btn-icon svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+.seg button[aria-checked="true"] {
+  background: var(--ink);
+  color: var(--bg);
+}
+/* A tool with kinds to choose from shows a small corner: tapped again, it opens them. */
+.seg button[data-options] {
+  position: relative;
+}
+.seg button[data-options]::after {
+  content: "";
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  border: 3px solid transparent;
+  border-right-color: currentColor;
+  border-bottom-color: currentColor;
+  opacity: 0.55;
+}
+@media (hover: hover) {
+  .seg button[aria-checked="false"]:hover,
+  .toolbar .btn-icon:not(:disabled):hover,
+  .toolbar .btn-icon[aria-expanded="true"] {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+}
+.toolbar .btn-icon[aria-expanded="true"] {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+.toolbar .btn-icon:disabled {
+  opacity: 0.35;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .seg button {
+    transition:
+      background-color 120ms ease-out,
+      color 120ms ease-out;
+  }
+}
+/* The tools show their icons alone; their names are for screen readers and tooltips. */
+.seg button {
+  padding: 0;
+}
+.seg button span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.inks {
+  display: inline-flex;
+  flex: none;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.inks input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.inks label {
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 40px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.inks .swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px oklch(0 0 0 / 0.18);
+}
+.inks input:checked + label .swatch {
+  box-shadow:
+    inset 0 0 0 1px oklch(0 0 0 / 0.18),
+    0 0 0 2.5px var(--bg),
+    0 0 0 4px var(--ink);
+}
+@media (hover: hover) {
+  .inks input:not(:checked) + label:hover {
+    background: var(--surface-2);
+  }
+}
+.inks input:focus-visible + label {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+/* With the system's own colors, as in Windows' contrast themes, the chosen tool and ink keep a plain outline. */
+@media (forced-colors: active) {
+  .seg button[aria-checked="true"],
+  .inks input:checked + label {
+    outline: 2px solid CanvasText;
+    outline-offset: -2px;
+  }
+}
+
+.go {
+  position: relative;
+  min-height: 40px;
+  height: 40px;
+  padding: 0 15px 0 13px;
+  gap: 7px;
+  font-weight: 650;
+}
+.go svg {
+  stroke-width: 1.8;
+}
+/* A dot on the button when the drawing has changed since the last reading; it takes no room, so nothing shifts. */
+.go[data-stale="true"]::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-ink);
+  opacity: 0.7;
+}
+
+/* Two rows on a phone, with the bar's menus as wide as the bar. */
+@media (max-width: 719px) {
+  .tools-row {
+    flex: 1 1 100%;
+  }
+  .toolbar .more,
+  .toolbar .tools {
+    position: static;
+  }
+  .toolbar .menu,
+  .toolbar .add .menu {
+    left: 0;
+    right: 0;
+    width: auto;
+    min-width: 0;
+  }
+}
+/* Up to the commonest phone widths, a few pixels of slack, as fonts set a little wider on some systems. */
+@media (max-width: 419px) {
+  .rule {
+    margin-inline: 4px;
+  }
+  .go {
+    padding-inline: 11px 12px;
+  }
+}
+@media (max-width: 399px) {
+  .inks label {
+    width: 30px;
+  }
+  .toolbar .btn-icon,
+  .seg button {
+    width: 36px;
+    min-width: 36px;
+  }
+  .rule {
+    margin-inline: 4px;
+  }
+  .go svg {
+    display: none;
+  }
+  .go {
+    padding-inline: 12px;
+  }
+}
+@media (max-width: 349px) {
+  .inks label {
+    width: 27px;
+  }
+  .toolbar .btn-icon,
+  .seg button {
+    width: 32px;
+    min-width: 32px;
+  }
+  .tools-row:last-child .rule {
+    display: none;
+  }
+}
+
+/* The menus: More, and Add with its shapes and templates. */
+.more,
+.tools {
+  position: relative;
+}
+.menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  z-index: 20;
+  display: grid;
+  gap: 2px;
+  min-width: 260px;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+}
+.menu[hidden] {
+  display: none;
+}
+.menu button {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink);
+  font: 450 0.95rem/1.2 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+.menu [role="menuitemcheckbox"] {
+  position: relative;
+  padding-left: 40px;
+}
+.menu [role="menuitemcheckbox"]::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 4px;
+}
+.menu [role="menuitemcheckbox"][aria-checked="true"]::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.menu [role="menuitemcheckbox"][aria-checked="true"]::after {
+  content: "";
+  position: absolute;
+  left: 17.5px;
+  top: 50%;
+  width: 5px;
+  height: 9px;
+  margin-top: -6.5px;
+  border: solid var(--accent-ink);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.menu [role="menuitemradio"] {
+  position: relative;
+  padding-left: 40px;
+}
+.menu [role="menuitemradio"][aria-checked="true"]::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.menu button small {
+  display: block;
+  margin-top: 2px;
+  color: var(--ink-3);
+  font-size: 0.8rem;
+}
+.tool-menu {
+  width: 290px;
+}
+.tool-menu button {
+  padding-block: 8px;
+}
+.menu [role="separator"] {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--line);
+}
+@media (hover: hover) {
+  .menu button:hover {
+    background: var(--surface-2);
+  }
+}
+.menu button:focus-visible {
+  outline-offset: -2px;
+}
+.add .menu {
+  width: 340px;
+  max-height: min(70svh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.menu-head {
+  margin: 8px 12px 4px;
+  color: var(--ink-3);
+  font: 600 0.8rem/1.2 var(--font);
+}
+.menu-head:first-child {
+  margin-top: 4px;
+}
+.add-shapes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px;
+}
+.add-shapes button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding: 0 8px;
+  font-size: 0.9rem;
+}
+.add-shapes svg {
+  flex: none;
+  width: 28px;
+  height: 20px;
+  stroke-width: 1.4;
+}
+.add-shapes svg circle {
+  fill: none;
+  stroke: currentColor;
+}
+.add-shapes svg .fill {
+  fill: currentColor;
+  stroke: none;
+}
+.add-arrows {
+  grid-template-columns: minmax(0, 1fr);
+}
+.add-templates {
+  display: grid;
+  gap: 2px;
+}
+.add-templates button {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* ─── the drawing ────────────────────────────────────────────────────────── */
+
+.pad {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+/* On a phone the drawing runs to the screen's edges: the whole width is for drawing. */
+@media (max-width: 719px) {
+  .pad {
+    margin-inline: calc(-1 * var(--gutter));
+    border-inline: 0;
+    border-radius: 0;
+  }
+}
+.pad canvas {
+  display: block;
+  width: 100%;
+  /* The small viewport height does not change when a phone's address bar or keyboard comes and goes. */
+  height: clamp(340px, calc(100svh - 250px), 1100px);
+  touch-action: none;
+  cursor: crosshair;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.pad canvas[data-tool="erase"],
+.pad canvas[data-tool="cut"] {
+  cursor: cell;
+}
+.pad canvas[data-tool="select"] {
+  cursor: default;
+}
+.pad canvas[data-tool="select"][data-over] {
+  cursor: move;
+}
+.pad canvas[data-tool="hand"],
+.pad canvas[data-space] {
+  cursor: grab;
+}
+.pad canvas[data-panning] {
+  cursor: grabbing;
+}
+@media (min-width: 1024px) {
+  .pad canvas {
+    height: clamp(420px, calc(100svh - 210px), 1100px);
+  }
+}
+/*
+ * A phone on its side: the tools, the drawing, and the line under it fit the screen together once scrolled to. The
+ * tool names go to screen readers to save room, the page measures the toolbar (--toolbar), which may still take two
+ * rows, and what was read keeps to two lines at most with "See the diagram" in sight. The rules for the line name
+ * .sketch so they outweigh the plain ones further down.
+ */
+@media (orientation: landscape) and (max-height: 540px) {
+  .pad canvas {
+    height: max(120px, calc(100svh - var(--toolbar, 52px) - 90px));
+  }
+  .toolbar .seg button {
+    padding: 0 11px;
+  }
+  .toolbar .seg button span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .sketch .read-row {
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  .sketch .read {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+  .sketch .read > span:first-child {
+    min-width: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+  .sketch .read .ms {
+    display: none;
+  }
+  .sketch .read .to-result {
+    flex: none;
+  }
+  .sketch .read-row .check {
+    flex: none;
+  }
+}
+/* On a narrow phone on its side, the outlines' switch is left to More, as in full screen. */
+@media (orientation: landscape) and (max-height: 540px) and (max-width: 699px) {
+  .sketch .read-row .check {
+    display: none;
+  }
+}
+.pad-hint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 14px;
+  padding: 24px;
+  color: var(--ink-2);
+  text-align: center;
+  pointer-events: none;
+}
+.pad-hint p {
+  max-width: 30ch;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.pad-hint strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--ink);
+  font-size: 1.06rem;
+  font-weight: 600;
+}
+.pad-hint .btn {
+  pointer-events: auto;
+}
+.pad-chip {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  max-width: calc(100% - 16px);
+  margin: 0;
+  padding: 3px 3px 3px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in oklch, var(--surface) 90%, transparent);
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  line-height: 1.3;
+}
+.pad-chip button,
+.pad-zoom {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 0.8rem/1 var(--font);
+  cursor: pointer;
+}
+/* In the drawing's corner: the zoom, which fits the drawing to the screen when pressed, and full screen. */
+.pad-corner {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 6px;
+}
+.pad-full {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: color-mix(in oklch, var(--surface) 90%, transparent);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.pad-full svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.pad-zoom {
+  min-height: 32px;
+  background: color-mix(in oklch, var(--surface) 90%, transparent);
+  color: var(--ink-2);
+  font-family: var(--mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.pad-zoom::after {
+  content: "Fit";
+  color: var(--ink);
+  font-family: var(--font);
+  font-weight: 600;
+}
+.pad-zoom[hidden] {
+  display: none;
+}
+/* What can be done with the chosen strokes, floating over them. */
+.sel-bar {
+  position: absolute;
+  z-index: 6;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  max-width: calc(100% - 8px);
+  padding: 3px;
+  border: 1px solid var(--line-strong);
+  border-radius: 9px;
+  background: var(--surface);
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.12),
+    0 8px 20px -6px oklch(0 0 0 / 0.32);
+}
+.sel-bar[hidden],
+.sel-bar button[hidden] {
+  display: none;
+}
+.sel-bar button {
+  height: 32px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink);
+  font: 600 0.82rem/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.sel-bar button[data-sel="delete"] {
+  color: var(--error);
+}
+/* On a narrow phone the bar keeps to one row; on the narrowest, with Paste too, it may take two. */
+@media (max-width: 399px) {
+  .sel-bar button {
+    padding: 0 7px;
+  }
+}
+/* The full-screen button shows the way it goes: corners out to fill the screen, corners in to leave it. */
+.full[aria-pressed="false"] .leave,
+.full[aria-pressed="true"] .enter {
+  display: none;
+}
+@media (hover: hover) {
+  .pad-full:hover {
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .sel-bar button:hover,
+  .pad-zoom:hover,
+  .pad-chip button:hover {
+    background: var(--surface-2);
+  }
+}
+.name-edit {
+  position: absolute;
+  z-index: 5;
+  margin: 0;
+}
+.name-edit input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 1rem/1.2 var(--font);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.read-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+.read {
+  margin: 0;
+  min-width: 0;
+  color: var(--ink-2);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+.read strong {
+  color: var(--ink);
+}
+.read .kept {
+  color: var(--warning);
+  font-weight: 600;
+}
+.read .ms {
+  color: var(--ink-3);
+  font: 0.8rem var(--mono);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.read .to-result {
+  margin-left: 4px;
+  font-weight: 560;
+  white-space: nowrap;
+}
+@media (min-width: 1024px) {
+  .read .to-result {
+    display: none;
+  }
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  color: var(--ink-2);
+  font-size: 0.94rem;
+  cursor: pointer;
+}
+.check input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
+/* ─── the result ─────────────────────────────────────────────────────────── */
+
+.result {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  scroll-margin-top: 12px;
+}
+.back {
+  justify-self: start;
+  font-size: 0.92rem;
+  font-weight: 560;
+}
+@media (min-width: 1024px) {
+  .back {
+    display: none;
+  }
+}
+.panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+.panel-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+}
+.panel h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 650;
+}
+.panel h2 label {
+  cursor: inherit;
+}
+.panel-head span {
+  color: var(--ink-3);
+  font-size: 0.86rem;
+}
+.diagram {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  overflow-x: auto;
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: opacity 160ms ease-out;
+}
+.diagram.is-busy {
+  opacity: 0.55;
+}
+.diagram svg {
+  max-width: 100%;
+  height: auto;
+}
+.diagram g.node,
+.diagram g.rough-node,
+.diagram g.cluster {
+  cursor: pointer;
+}
+.empty {
+  max-width: 32ch;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.94rem;
+  text-align: center;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.status {
+  margin: 0;
+  color: var(--ink-3);
+  font-size: 0.88rem;
+}
+.err {
+  margin: 0;
+  color: var(--error);
+  font-size: 0.9rem;
+}
+.names {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 270px), 1fr));
+  gap: 8px 14px;
+}
+.names > .status {
+  grid-column: 1 / -1;
+}
+.name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.names label {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+/* Each node's shape menu, and the diagram's kind: a plain select with a drawn chevron, so it takes the theme's colors. */
+.names select,
+.shape-note {
+  flex: none;
+  width: 8.4em;
+}
+.pick {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-2);
+  font-size: 0.94rem;
+}
+.names select,
+.pick select {
+  min-height: 40px;
+  padding: 0 26px 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background:
+    linear-gradient(45deg, transparent 50%, var(--ink-2) 50%) right 14px center / 5px 5px no-repeat,
+    linear-gradient(135deg, var(--ink-2) 50%, transparent 50%) right 9px center / 5px 5px no-repeat,
+    var(--surface-2);
+  color: var(--ink);
+  font: 400 0.9rem/1.2 var(--font);
+  appearance: none;
+  cursor: pointer;
+}
+.names select:disabled,
+.pick select:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+.shape-note {
+  padding-left: 10px;
+  color: var(--ink-3);
+  font-size: 0.86rem;
+}
+.names input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font: 400 0.95rem/1.3 var(--font);
+}
+.names input::placeholder {
+  color: var(--ink-3);
+}
+.names input:disabled {
+  opacity: 0.55;
+}
+.tag {
+  flex: none;
+  min-width: 28px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 600 0.78rem/1 var(--mono);
+  text-align: center;
+}
+/* A line's tag names its two ends, and is outlined where a shape's is filled. */
+.line-tag {
+  padding: 4px 5px;
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+textarea.code {
+  width: 100%;
+  min-height: 240px;
+  padding: 12px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--ink);
+  font: 0.86rem/1.55 var(--mono);
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diagram {
+    transition: none;
+  }
+}
+
+/* ─── full screen ────────────────────────────────────────────────────────── */
+
+/* The tools, the drawing, and the line under it take the whole screen; the rest of the page waits underneath. */
+.is-full {
+  overflow: hidden;
+}
+.is-full .sketch {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: 6px;
+  padding: max(6px, env(safe-area-inset-top)) max(8px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom))
+    max(8px, env(safe-area-inset-left));
+  background: var(--bg);
+}
+.is-full .pad {
+  display: grid;
+  min-height: 0;
+  border-radius: var(--radius);
+}
+.is-full .pad canvas {
+  height: 100%;
+  min-height: 0;
+}
+.is-full .read-row {
+  flex-wrap: nowrap;
+  align-items: center;
+  min-height: 30px;
+  padding-inline: 4px;
+}
+/* What was read takes two lines at most, and "See the diagram" stays in sight beside it. */
+.is-full .read {
+  display: flex;
+  align-items: center;
+  gap: 2px 10px;
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+.is-full .read > span:first-child {
+  min-width: 0;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+.is-full .read .ms {
+  display: none;
+}
+.is-full .read .to-result {
+  display: inline;
+  flex: none;
+  margin-left: 0;
+}
+/* On a phone the outlines' switch is in More, which leaves the line under the drawing its whole width. */
+@media (max-width: 559px) {
+  .is-full .read-row .check {
+    display: none;
+  }
+}
+.is-full .read-row .check {
+  flex: none;
+  min-height: 30px;
+  font-size: 0.86rem;
+}

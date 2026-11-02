@@ -1,0 +1,110 @@
+/*
+ * The colors and type of every page. :root is the first look, Lagoon: neutrals that lean toward the sea-glass blue
+ * (hue 215), a deep teal accent on paper, and a bright aqua on the night. The other looks are site-looks.v1.css, which
+ * sets the same variables. The inks are the drawing's own colors and stay the same in every look.
+ */
+
+:root {
+  color-scheme: light dark;
+  --bg: oklch(0.968 0.006 215);
+  --surface: oklch(0.996 0.002 215);
+  --surface-2: oklch(0.944 0.008 215);
+  --ink: oklch(0.22 0.014 225);
+  --ink-2: oklch(0.4 0.016 225);
+  --ink-3: oklch(0.5 0.016 225); /* 5:1 on --bg */
+  --line: oklch(0.9 0.008 215);
+  --line-strong: oklch(0.8 0.012 215);
+  --dots: oklch(0.82 0.012 215);
+  --accent: #13607a;
+  --accent-ink: #ffffff;
+  --accent-soft: oklch(0.93 0.035 215);
+  --focus: #1c7a96;
+  --error: #b42318;
+  --error-soft: #fceae7;
+  --warning: #955500;
+  --warning-soft: #fcf0d9;
+  --ok: #1f7a4d;
+
+  /* The night surfaces: the header, the title band, and the footer, the same in light and dark. --bright is the
+     accent as it reads on them. */
+  --night: #04161d;
+  --night-2: #0a2129;
+  --night-line: #24404a;
+  --night-ink: #ecf5f7;
+  --night-muted: #a6bcc3;
+  --bright: #5fd6e6;
+  --mark: #5fd6e680;
+
+  /* The five inks. */
+  --draw-ink: var(--ink);
+  --draw-green: #1f7a5a;
+  --draw-blue: #2563eb;
+  --draw-red: #c0392b;
+  --draw-amber: #b26b00;
+
+  /* Corners stay small: a tool, not a toy. */
+  --radius: 7px;
+  --radius-lg: 10px;
+  --shadow: 0 1px 2px oklch(0.2 0.012 215 / 0.07), 0 4px 14px oklch(0.2 0.012 215 / 0.07);
+  --shadow-card: 0 1px 2px #04161d0f, 0 18px 40px -16px #04161d47;
+  --shadow-night: 0 24px 60px -20px #000100cc;
+  --font: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "Atkinson Hyperlegible Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Roboto Mono", monospace;
+  --gutter: clamp(16px, 4vw, 40px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: oklch(0.17 0.008 225);
+    --surface: oklch(0.215 0.009 225);
+    --surface-2: oklch(0.25 0.01 225);
+    --ink: oklch(0.94 0.006 215);
+    --ink-2: oklch(0.8 0.01 215);
+    --ink-3: oklch(0.68 0.012 215);
+    --line: oklch(0.3 0.01 225);
+    --line-strong: oklch(0.41 0.012 225);
+    --dots: oklch(0.32 0.01 225);
+    --accent: #5cc3d6;
+    --accent-ink: #04161d;
+    --accent-soft: oklch(0.3 0.045 215);
+    --focus: #7fd3e2;
+    --error: #ff8f80;
+    --error-soft: #3a1e1b;
+    --warning: #f0b35a;
+    --warning-soft: #362a15;
+    --ok: #6fcf9d;
+    --mark: #5fd6e64d;
+
+    --draw-green: #5dbb94;
+    --draw-blue: #7aa2ff;
+    --draw-red: #ff8f80;
+    --draw-amber: #f0b35a;
+
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 14px rgb(0 0 0 / 0.25);
+    --shadow-card: 0 1px 2px #0000004d, 0 18px 40px -16px #000000b3;
+  }
+}
+
+/* The fonts are files of the site, cut to the weights and characters the pages use. Text shows at once in the system
+   font and changes when the file arrives. */
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("/assets/fonts/atkinson-hyperlegible-next.v1.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  src: url("/assets/fonts/atkinson-hyperlegible-next-italic.v1.woff2") format("woff2");
+  font-weight: 400 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Mono";
+  src: url("/assets/fonts/atkinson-hyperlegible-mono.v1.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,221 @@
+/*
+ * The site's looks after the first (Lagoon, which is tokens.css's :root), chosen in the header's Theme menu and kept
+ * in this browser, as on grooph's site. Fetched only by a visit that keeps or chooses one of them: the page's head
+ * writes its link before the first paint, and the menu fetches it the first time a look is chosen. Each sets the same
+ * variables :root does. Words on every ground here are at 4.5 to 1 or more. A change here is a new file name (v2).
+ */
+
+/* Meteor: Link Meteor's night, cool paper and lime. */
+:root[data-theme="meteor"] {
+  --bg: #f2f4f9;
+  --surface: #fdfeff;
+  --surface-2: #e9ecf3;
+  --ink: #161d2b;
+  --ink-2: #3b4253;
+  --ink-3: #5d6371;
+  --line: #dbdee5;
+  --line-strong: #b9bec7;
+  --dots: #c3c7d1;
+  --accent: #2e6813;
+  --accent-soft: #dfefc4;
+  --focus: #357518;
+  --edge: #6c727e;
+  --night: #0e1526;
+  --night-2: #172034;
+  --night-line: #343d50;
+  --night-ink: #eff2f7;
+  --night-muted: #b1b7c5;
+  --bright: #c3f344;
+  --mark: #c3f3448c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="meteor"] {
+    --bg: #0c0f17;
+    --surface: #141924;
+    --surface-2: #1c222d;
+    --ink: #eef0f5;
+    --ink-2: #c0c4cc;
+    --ink-3: #989fab;
+    --line: #2b303c;
+    --line-strong: #464d5b;
+    --dots: #2b303c;
+    --accent: #bfeb56;
+    --accent-ink: #0e1526;
+    --accent-soft: #243014;
+    --focus: #c3f344;
+    --edge: #8c929f;
+    --mark: #c3f34452;
+  }
+}
+
+/* Harbor: a harbor at night: navy, cool paper and a clear blue. */
+:root[data-theme="harbor"] {
+  --bg: #f2f5fa;
+  --surface: #fdfeff;
+  --surface-2: #e7ecf4;
+  --ink: #121a2b;
+  --ink-2: #36415a;
+  --ink-3: #55607a;
+  --line: #d7dee9;
+  --line-strong: #b3bdce;
+  --dots: #c1cad8;
+  --accent: #1d4fa8;
+  --accent-soft: #dde7f8;
+  --focus: #2a5fc0;
+  --edge: #66718a;
+  --night: #0a1428;
+  --night-2: #12203a;
+  --night-line: #2c3b58;
+  --night-ink: #edf2fb;
+  --night-muted: #aab6cc;
+  --bright: #7fb8ff;
+  --mark: #7fb8ff8c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="harbor"] {
+    --bg: #0b111d;
+    --surface: #121a29;
+    --surface-2: #192234;
+    --ink: #edf1f8;
+    --ink-2: #c1c9d8;
+    --ink-3: #95a1b6;
+    --line: #263045;
+    --line-strong: #3f4b63;
+    --dots: #263045;
+    --accent: #8ab8ff;
+    --accent-ink: #0a1428;
+    --accent-soft: #1b2a45;
+    --focus: #9cc4ff;
+    --edge: #8792a8;
+    --mark: #7fb8ff52;
+  }
+}
+
+/* Plum: a violet night, lilac-gray paper and plum. */
+:root[data-theme="plum"] {
+  --bg: #f6f3f9;
+  --surface: #fefdff;
+  --surface-2: #ece6f3;
+  --ink: #1e1428;
+  --ink-2: #413852;
+  --ink-3: #625a72;
+  --line: #e1dae9;
+  --line-strong: #c2b7d0;
+  --dots: #ccc3d8;
+  --accent: #6a3d9f;
+  --accent-soft: #ebe0f7;
+  --focus: #7a4cbf;
+  --edge: #756b86;
+  --night: #1a0f24;
+  --night-2: #251733;
+  --night-line: #43325a;
+  --night-ink: #f4effa;
+  --night-muted: #bcb0cc;
+  --bright: #d4a8ff;
+  --mark: #d4a8ff8c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="plum"] {
+    --bg: #110c17;
+    --surface: #19121f;
+    --surface-2: #21182a;
+    --ink: #f2eef7;
+    --ink-2: #cbc3d6;
+    --ink-3: #a297b1;
+    --line: #2e2439;
+    --line-strong: #4a3d5a;
+    --dots: #2e2439;
+    --accent: #c9a3ff;
+    --accent-ink: #1a0f24;
+    --accent-soft: #2d1f40;
+    --focus: #d4b4ff;
+    --edge: #978aa8;
+    --mark: #d4a8ff52;
+  }
+}
+
+/* Ember: a warm charcoal night, warm paper and terracotta. */
+:root[data-theme="ember"] {
+  --bg: #faf6f1;
+  --surface: #fffdfa;
+  --surface-2: #f1eae1;
+  --ink: #241a12;
+  --ink-2: #4a3d31;
+  --ink-3: #6a5b4d;
+  --line: #e6dccf;
+  --line-strong: #ccbead;
+  --dots: #d6c9b9;
+  --accent: #a33d16;
+  --accent-soft: #f7e2d6;
+  --focus: #b8481c;
+  --edge: #7c6d5f;
+  --night: #1c130d;
+  --night-2: #2a1d14;
+  --night-line: #4a382a;
+  --night-ink: #fbf4ec;
+  --night-muted: #ccbcaa;
+  --bright: #ffa564;
+  --mark: #ffa5648c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="ember"] {
+    --bg: #15100c;
+    --surface: #1d1712;
+    --surface-2: #261e18;
+    --ink: #f6efe7;
+    --ink-2: #d4c8ba;
+    --ink-3: #ac9e8e;
+    --line: #33291f;
+    --line-strong: #504334;
+    --dots: #33291f;
+    --accent: #ffa36b;
+    --accent-ink: #1c130d;
+    --accent-soft: #3a2416;
+    --focus: #ffb07d;
+    --edge: #a09080;
+    --mark: #ffa56452;
+  }
+}
+
+/* Graphite: near-black, neutral gray and ink, with no hue at all: it sits beside any picture theme. */
+:root[data-theme="graphite"] {
+  --bg: #f4f4f5;
+  --surface: #ffffff;
+  --surface-2: #e9e9ec;
+  --ink: #18181b;
+  --ink-2: #3f3f46;
+  --ink-3: #5e5e67;
+  --line: #dedee2;
+  --line-strong: #bdbdc4;
+  --dots: #c8c8ce;
+  --accent: #27272a;
+  --accent-soft: #e4e4e7;
+  --focus: #52525b;
+  --edge: #6e6e77;
+  --night: #111113;
+  --night-2: #1b1b1e;
+  --night-line: #35353b;
+  --night-ink: #f4f4f5;
+  --night-muted: #b4b4bb;
+  --bright: #b8b8c0;
+  --mark: #b8b8c08c;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-theme="graphite"] {
+    --bg: #0f0f11;
+    --surface: #17171a;
+    --surface-2: #1f1f23;
+    --ink: #f2f2f3;
+    --ink-2: #c8c8cd;
+    --ink-3: #9d9da6;
+    --line: #2a2a2f;
+    --line-strong: #45454c;
+    --dots: #2a2a2f;
+    --accent: #e4e4e7;
+    --accent-ink: #111113;
+    --accent-soft: #2a2a2f;
+    --focus: #d4d4d8;
+    --edge: #8f8f98;
+    --mark: #e4e4e752;
+  }
+}

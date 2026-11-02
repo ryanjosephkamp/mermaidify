@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!--doc-head-->
+    <!--site-head:docs-->
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the content</a>
+    <!--site-header:docs-->
+    <main id="main">
+      <!--doc-hero-->
+      <div class="site-wrap page-body has-toc">
+        <!--doc-toc-->
+        <div class="doc">
+          <h2 id="kinds">What each one shows</h2>
+          <p>Both are shapes joined by arrows. They differ in what a shape stands for.</p>
+          <ul>
+            <li><strong>A flowchart shows the steps of a process,</strong> in order. Each shape is something that happens, or a question with an arrow for each answer, and each arrow says what comes next. Use one for a recipe, a sign-up, a checklist with decisions, or how a piece of code runs.</li>
+            <li><strong>A state diagram shows the conditions one thing can be in,</strong> and what moves it from one to another. Each shape is a state the thing stays in for a while, and each arrow is a change, named for what causes it. A small filled dot marks where it starts, and a circle with a dot in it where it can end. Use one for an order (placed, paid, shipped), a door (closed, open, locked), or a screen in an app.</li>
+          </ul>
+          <p>The same drawing can be read either way: choose under <strong>Read as</strong>. Both examples below were drawn and read here, with the names typed after drawing. Each shape the reader found is tinted, and each arrow it read is shaded under the ink.</p>
+          <div class="ink-examples">
+            <figure>
+              <svg viewBox="70 4 310 443" aria-hidden="true"><path class="found" d="M154 62L136 61L123 60L111 56L102 53L99 51L95 49L92 46L89 43L88 39L90 35L93 31L96 29L104 25L117 21L130 19L147 18L164 19L177 21L190 24L198 27L202 29L205 32L209 35L211 39L210 43L208 47L205 50L198 54L185 58L172 60L155 61Z"/><path class="found" d="M92 96L125 97L147 97L169 97L207 95L209 99L209 121L210 148L206 150L179 151L157 151L91 149L89 145L91 96Z"/><path class="found" d="M151 181L192 212L213 227L216 230L191 247L151 272L147 271L108 246L87 232L84 229L110 211L146 183L150 182Z"/><path class="found" d="M253 301L322 299L364 300L365 326L365 352L362 355L294 353L257 353L253 352L253 331L252 305L253 302Z"/><path class="found" d="M197 398L205 402L209 404L212 407L213 411L212 416L209 419L205 422L197 425L185 429L172 431L158 433L140 433L123 431L110 429L101 426L93 422L90 419L88 415L88 411L90 407L93 404L101 400L114 396L131 392L149 391L167 391L184 393L197 397Z"/><path class="read" d="M150 64L149 92"/><path class="read" d="M150 154L151 181"/><path class="read" d="M150 276L149 323L151 387"/><path class="read" d="M218 229L276 227L308 228L307 267L308 297"/><path class="read" d="M308 358L309 412L257 413L216 412"/><g class="ink"><path d="M154 62L141 62L130 61L118 59L104 54L97 51L92 47L89 43L88 40L89 36L92 32L97 28L104 25L118 21L129 19L140 19L152 18L170 20L181 22L190 24L198 28L205 31L209 35L211 39L210 44L209 46L206 50L200 53L192 56L183 58L172 60L161 61L149 61L137 60L121 58"/><path d="M89 96L123 97L148 97L209 95L209 119L210 150L175 151L144 151L89 149L91 96L94 98"/><path d="M151 181L194 214L216 229L205 237L185 251L150 273L108 246L84 229L108 212L149 181L152 183"/><path d="M253 301L319 299L339 299L364 300L365 331L365 355L292 353L273 353L253 354L253 331L252 301L254 303"/><path d="M193 397L204 401L210 405L213 409L213 411L213 413L211 417L207 421L200 424L192 427L182 430L170 432L152 433L140 433L122 431L111 429L102 426L95 423L90 420L88 416L87 414L87 412L88 410L92 405L97 402L105 398L114 395L131 392L149 391L161 391L173 392L183 393L193 396L201 399L207 402L210 406"/><path d="M150 64L149 92L155 82L150 93L145 82"/><path d="M150 154L150 181L156 170L150 180L144 169"/><path d="M150 276L149 323L151 387L156 376L150 386L144 375"/><path d="M218 229L276 227L308 228L307 264L308 297L314 286L309 296L303 285"/><path d="M308 358L309 412L254 413L216 412L227 417L217 411L227 406"/></g></svg>
+              <figcaption><strong>Making tea, as a flowchart.</strong> Steps run top to bottom, and the diamond asks a question: one arrow for yes, one for no.</figcaption>
+              <div class="code" data-lang="mermaid"><pre><code>flowchart TD
+  A(["Start"])
+  B["Boil the water"]
+  C{"Milk?"}
+  D["Add milk"]
+  E(["Serve"])
+  A --&gt; B
+  B --&gt; C
+  C --&gt;|"no"| E
+  C --&gt;|"yes"| D
+  D --&gt; E</code></pre></div>
+            </figure>
+            <figure>
+              <svg viewBox="21 5 403 230" aria-hidden="true"><path class="found" d="M47 45L46 48L45 50L42 52L40 52L37 51L35 50L33 47L33 45L34 41L35 40L38 38L40 38L44 39L45 40L47 43Z"/><path class="found" d="M93 21L154 19L174 19L199 20L202 22L203 38L203 68L201 71L130 69L95 69L93 67L93 46L92 21Z"/><path class="found" d="M93 169L128 169L200 171L203 173L203 193L202 219L198 220L173 219L152 219L97 221L93 219L91 174L93 171Z"/><path class="found" d="M303 21L374 19L394 19L409 20L409 40L410 70L406 71L396 71L330 69L300 69L299 65L301 24L303 22Z"/><path class="read" d="M51 45L88 46"/><path class="read" d="M206 36L263 35L295 36"/><path class="read" d="M295 56L260 57L206 56"/><path class="read" d="M128 73L127 124L128 167"/><path class="read" d="M168 166L169 131L167 74"/><g class="ink"><path d="M43 45L43 49L39 49L38 44L36 40L39 41L42 47L45 50L43 48L39 43L35 40L36 43L40 48L43 50L45 47L41 41L39 40L35 44L38 49L39 49L43 45L42 41L43 41L39 46L38 50L36 48L42 40L45 42L43 47L39 50L35 47L36 42L40 40L43 44L45 49L41 50L35 41L38 41"/><path d="M93 21L153 19L174 19L202 20L203 47L203 71L133 69L113 69L93 70L93 47L92 21L95 23"/><path d="M300 21L321 21L375 19L409 19L409 41L410 71L384 71L329 69L299 69L301 21L304 23"/><path d="M93 169L130 169L203 171L203 194L202 220L177 219L156 219L93 221L93 204L91 170L94 172"/><path d="M51 45L88 46L77 39L87 45L77 50"/><path d="M206 36L263 35L295 36L285 30L296 36L286 42"/><path d="M295 56L260 57L206 56L216 61L205 56L216 50"/><path d="M128 73L127 124L128 167L134 156L129 166L122 155"/><path d="M168 166L169 131L167 74L162 84L168 73L174 84"/></g></svg>
+              <figcaption><strong>A door, as a state diagram.</strong> It starts closed. Opening and closing move it between Closed and Open; locking and unlocking, between Closed and Locked. It cannot go from Open to Locked without closing first.</figcaption>
+              <div class="code" data-lang="mermaid"><pre><code>stateDiagram-v2
+  direction LR
+  state "Closed" as A
+  state "Locked" as B
+  state "Open" as C
+  [*] --&gt; A
+  A --&gt; C : open
+  C --&gt; A : close
+  A --&gt; B : lock
+  B --&gt; A : unlock</code></pre></div>
+            </figure>
+          </div>
+
+          <h2 id="states">State diagrams</h2>
+          <p>Choose <strong>State diagram</strong> under <strong>Read as</strong>, and the same drawing is read as states and the transitions between them. Draw a start as a small filled dot, and an end as a circle with a dot or a small circle in it. Mermaid writes both as <code>[*]</code> and draws a start or an end from the way the arrow runs, so a small circle works for either too.</p>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>You draw</th><th>Mermaid writes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A small filled dot, or a small circle, with an arrow out</td><td><code>[*] --&gt; A</code></td></tr>
+                <tr><td>A circle with a dot or a circle in it, with an arrow in</td><td><code>A --&gt; [*]</code></td></tr>
+                <tr><td>A box, an oval, or any other shape</td><td><code>state "State 1" as A</code></td></tr>
+                <tr><td>A diamond</td><td><code>state B &lt;&lt;choice&gt;&gt;</code></td></tr>
+                <tr><td>A shape around other shapes</td><td><code>state "Group 1" as G1 { … }</code></td></tr>
+                <tr><td>An arrow you named</td><td><code>A --&gt; B : paid</code></td></tr>
+                <tr><td>Green, blue, red, or amber ink</td><td><code>classDef</code> and <code>class</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <ul>
+            <li><strong>Dots.</strong> A dot is a small closed or filled mark that an arrow ends at, standing clear of every shape: drawn on its own, or filled in at the free end of its arrow in the same stroke. A circle up to 50 drawing units across, round or a little oval, is a dot too, and so is one up to 70 across with a filled or closed mark inside it, or a circle in a circle up to 70 across. A filled or closed head drawn a little short of a shape stays that arrow's head, and a letter that no arrow ends at stays out.</li>
+            <li><strong>Names.</strong> States are numbered in reading order, "State 1", "State 2", and take names as shapes do. A start or an end has no name, and Mermaid gives a choice none, so a tap on one opens no name box.</li>
+            <li><strong>What each shape is.</strong> Under <strong>Names</strong>, each shape's menu makes it a state, a choice, or a start or end, and the choice stays with its strokes, as a look does in a flowchart.</li>
+            <li><strong>Transitions are plain.</strong> Mermaid draws every transition in a state diagram the same way, so dotted and thick lines read as plain ones, an arrow with heads at both ends becomes two transitions, and colored ink colors the states only. A line's style and name are kept for when the drawing reads as a flowchart again.</li>
+            <li><strong>Composite states.</strong> A transition between two states inside the same group is written inside it; any other is written at the top. A dot inside a group starts or ends that group, and its transition is written inside it, to the state there that holds the other end. When the other end is outside the group, the group itself stands for the dot.</li>
+          </ul>
+
+          <!--doc-pager-->
+        </div>
+      </div>
+    </main>
+    <!--site-footer:docs-->
+    <script type="module" src="/src/docs/main.ts"></script>
+  </body>
+</html>

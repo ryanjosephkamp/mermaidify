@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!--doc-head-->
+    <!--site-head:docs-->
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the content</a>
+    <!--site-header:docs-->
+    <main id="main">
+      <!--doc-hero-->
+      <div class="site-wrap page-body has-toc">
+        <!--doc-toc-->
+        <div class="doc">
+          <h2 id="toolbar">The toolbar</h2>
+          <p>Above the drawing, from the left: the four tools (<strong>Pen</strong>, <strong>Eraser</strong>, <strong>Select</strong>, and <strong>Hand</strong>) and the five inks; then <strong>Undo</strong>, <strong>Redo</strong>, and <strong>Clear</strong>; then <strong>Add</strong>, for shapes, arrows, and templates, and <strong>More</strong>; and <strong>Mermaidify</strong>, which reads the drawing. Hold a finger or the pointer on a tool to see its name. In the drawing's top right corner are the zoom, which fits the drawing to the screen when pressed, and <strong>Full screen</strong>.</p>
+          <p><strong>A tool with a small corner has kinds.</strong> Tap it again once it is chosen, and its kinds open under it: the eraser takes whole strokes or only what it passes over, and Select drags a box or draws a lasso. The kind you pick is kept in this browser.</p>
+          <p><strong>Clear</strong> empties the drawing in one press, and <strong>Undo</strong> brings it all back, names included.</p>
+
+          <h2 id="pens">Pens, fingers, and palms</h2>
+          <ul>
+            <li><strong>A pen</strong> (an S Pen, an Apple Pencil, or another stylus) switches the drawing to pen mode the moment it is seen, even hovering. Then only the pen draws, and a palm resting on the screen draws nothing. Fingers move the drawing instead: one finger drags it, two fingers pinch to zoom, from 10% to 400%. <strong>Let fingers draw</strong>, on the drawing, switches back.</li>
+            <li><strong>The pen's side button</strong>, or its eraser end where it has one, erases whole strokes while held, whichever eraser is chosen.</li>
+            <li><strong>With fingers</strong>, one finger draws and two fingers pinch or drag the drawing.</li>
+            <li><strong>With a mouse or a trackpad</strong>, the left button draws. Over the drawing, the wheel zooms about the pointer, up to come closer and down to go back, as a pinch on a trackpad does, so on a trackpad two fingers up and down zoom too; a scroll to the side moves the drawing sideways. To move the drawing, hold <kbd>Space</kbd> and drag, drag with the middle button, or pick <strong>Hand</strong> and drag. The page itself scrolls with the pointer anywhere but the drawing. <strong>More</strong>, then <strong>Fit the drawing to the screen</strong>, brings everything back into view.</li>
+            <li><strong>Hand</strong> (<kbd>H</kbd>) only moves the drawing, with any pen, finger, or mouse, so nothing is drawn by mistake while you look around.</li>
+          </ul>
+
+          <h2 id="erase">Erasing</h2>
+          <p>The eraser has two kinds. Tap it again once it is chosen to switch between them.</p>
+          <ul>
+            <li><strong>Erase whole strokes</strong>, the first kind: touch any part of a stroke to take all of it, which is what the reader needs anyway.</li>
+            <li><strong>Erase only what it passes over</strong> takes only the ink it passes over, as wide as the eraser's circle, and leaves the rest of each stroke as strokes of their own. Snip a line off a box drawn with it in one stroke, trim a stray tail, or open a gap in a side. An outline drawn back to its start and cut once stays one stroke, open at the cut, and still reads as its shape while the gap is small; what is left of a stroke never closes up again at a later cut. Ink drawn twice over the same place goes together, as the eraser can't tell the passes apart. Names and choices stay with what is left: a box cut free of its line keeps its name. With fingers drawing, two fingers early in a pass pinch and pan instead.</li>
+            <li>Neither kind puts anything on a clipboard. To move strokes, or to copy and paste them, use <a href="#select">Select</a>.</li>
+          </ul>
+
+          <h2 id="select">Select, move, copy, and snap</h2>
+          <ul>
+            <li><strong>Press a stroke and drag</strong>, with <strong>Select</strong> (<kbd>V</kbd>), to move it at once; there is no need to choose it first. A press inside a closed shape takes the shape too, unless it holds other shapes, as a group's frame does: there a drag draws a box.</li>
+            <li><strong>Choose several</strong> by dragging a box from an empty place: every stroke the box reaches into is taken whole, so a box over part of a box and part of its arrow takes both. Tap Select again and pick <strong>Draw a lasso</strong> to draw a loop around strokes instead. Whatever is drawn inside a chosen shape goes with it (a name written in a box, the dot in an end ring, the states in a composite state), and so does everything grouped with a chosen stroke. Tap an empty place to let go.</li>
+            <li><strong>Add to what is chosen</strong> with <kbd>Shift</kbd> (or <kbd>⌘</kbd> on a Mac, <kbd>Ctrl</kbd> elsewhere) and a click on another stroke, or inside another shape; the same click on a chosen one lets it go. With the key held, a box adds what it reaches to what is chosen.</li>
+            <li><strong>Move them</strong> by dragging any of them, or anywhere inside the dashed box around them. <strong>Turn them</strong> with the round knob above the box, in steps of 15 degrees, so boxes stay square and lines straight. <strong>Grow or shrink them</strong> with the square knob at the box's lower right corner.</li>
+            <li><strong>The bar over them</strong> cuts or copies them to a clipboard, pastes a copy into the middle of the screen, duplicates them beside themselves, groups them, snaps them, or deletes them. A copy keeps the names and choices of what it copies. <strong>Group</strong> makes strokes move as one: a tap on any of them chooses them all, until <strong>Ungroup</strong>.</li>
+            <li><strong>Snap</strong> makes the chosen strokes clean, as holding them would have: each shape becomes its clean outline, each arrow a straight line with a clean head, and a line with its head drawn apart, a V or a triangle, becomes one arrow. Dotted and thick lines, filled dots, and rings stay as drawn, as a clean stroke would lose what they mean. Names stay with what was snapped, and <strong>Undo</strong> brings back what was drawn.</li>
+            <li>Names stay with the strokes they belong to, wherever the strokes are moved. Each move, turn, paste, or delete is one step for <strong>Undo</strong>.</li>
+          </ul>
+
+          <h2 id="add">Add shapes, arrows, and templates</h2>
+          <ul>
+            <li><strong>Add</strong>, the plus, puts a clean shape in the middle of the screen, for shapes that are hard to draw well: a box, an oval, a circle, a diamond, a hexagon, a parallelogram, a trapezoid, a triangle, a start dot, or an end ring.</li>
+            <li><strong>Arrows</strong>: an arrow; a <strong>two-way arrow</strong>, with a head at each end, for two shapes that each lead to the other (a flowchart writes it <code>A &lt;--&gt; B</code>, and a state diagram as two transitions, one each way); and <strong>arrows both ways</strong>, a pair side by side, one each way, so each can have its own name. Drag an arrow between two shapes to join them.</li>
+            <li><strong>Templates</strong> add a whole small diagram to start from, its shapes and arrows already named, in three groups. <strong>Flowcharts</strong>: steps in order, a yes-or-no choice, trying until done, signing in with a few tries, and a request retried after a wait. <strong>State diagrams</strong>: a door, a traffic light, an order, a media player, and a vending machine. A state diagram template switches the reading to a state diagram.</li>
+            <li><strong>Agent workflows</strong> are flowcharts of <a href="https://ryanjosephkamp.github.io/grooph/" rel="noopener">grooph</a>'s patterns: a grind loop, a Ralph loop, a red-team loop, a review gate, spec then loop, a human gate before an irreversible step, debate then build, and tournament then judge. Each uses the shapes grooph reads: a box for a builder or a planner, a diamond for a critic or a judge, a hexagon for a check, a trapezoid for a person's approval, and a double circle for done, with <em>pass</em> and <em>fail</em> on the arrows they decide. Their Mermaid opens in grooph as the same workflow.</li>
+            <li>What is added is ink like anything you draw: the reader reads it the same way, and it can be erased, snipped, moved, and drawn over. It arrives chosen, so it can be dragged into place at once; pick the pen to draw again.</li>
+          </ul>
+
+          <h2 id="names">Names on the drawing</h2>
+          <ul>
+            <li><strong>A name you type</strong> for a shape or a line shows on the drawing, in its shape or along its line, in the ink it was drawn in. It stays there as you draw more, move, or erase, and goes with its strokes. <strong>More</strong>, then <strong>Show names on the drawing</strong>, hides them for a drawing of the shapes alone; the choice is kept in this browser.</li>
+            <li><strong>What was read</strong>, the outlines and letters Mermaidify paints over the drawing, goes away with a tap or a click on an empty place, with any tool, or with <kbd>Esc</kbd>. A tap on a shape or a line still opens its name, and brings what was read back.</li>
+          </ul>
+
+          <h2 id="snap">Snapping</h2>
+          <ul>
+            <li><strong>Hold to snap.</strong> Draw a shape, come back to where it began, and hold still for half a second before lifting. The outline snaps to the clean shape it is closest to: a rough box becomes a box, a near circle becomes round, and a near square becomes square. Hold at the end of a nearly straight line and it becomes straight.</li>
+            <li><strong>Hold at the end of an arrow</strong> drawn in one stroke, its head last, a V or a closed triangle, and it becomes a clean, straight arrow. Keep holding and move: the tip follows, and the head turns to point the new way, so you can aim it at the shape you meant before lifting.</li>
+            <li><strong>Keep going without lifting.</strong> After a snap, the same press draws on. Draw a box, hold, move inside it, draw a smaller box, and hold again: two clean boxes, read as a box in a box. The way you moved from one to the other is left out when it stays inside the first shape. Holding at the corners of a line bends it into straight pieces. Undo takes back the whole press.</li>
+            <li><strong>What it snaps to is what it reads.</strong> A clean shape is read like any other stroke, so the snap shows you the reading before you press Mermaidify. If it snapped to the wrong shape, undo it, or change its look under <strong>Names</strong>.</li>
+            <li><strong>Turn it off</strong> from <strong>More</strong>, with <strong>Snap shapes and arrows when you hold</strong>. The choice is kept in this browser.</li>
+          </ul>
+
+          <h2 id="full-screen">Full screen</h2>
+          <p><strong>Full screen</strong>, the button in the drawing's top right corner (or <kbd>F</kbd>), gives the drawing the whole window, with every tool above it and what was read below it. Where the browser allows it, its own bars go too, which helps most with a phone on its side. The same button, <kbd>Esc</kbd>, or the phone's back gesture leaves it, and <strong>See the diagram</strong> leaves it and goes to the result.</p>
+
+          <h2 id="keys">Keys</h2>
+          <p><kbd>D</kbd> picks the pen, <kbd>E</kbd> the eraser that takes whole strokes, <kbd>S</kbd> (or <kbd>C</kbd>) the one that takes only what it passes over, <kbd>V</kbd> Select, and <kbd>H</kbd> the hand. Hold <kbd>Space</kbd> with the pointer over the drawing and drag to move it. With strokes chosen, <kbd>Ctrl</kbd>+<kbd>C</kbd> copies, <kbd>Ctrl</kbd>+<kbd>X</kbd> cuts, <kbd>Ctrl</kbd>+<kbd>V</kbd> pastes, <kbd>Ctrl</kbd>+<kbd>D</kbd> duplicates, <kbd>Delete</kbd> deletes, and <kbd>Esc</kbd> lets go; with nothing chosen, <kbd>Esc</kbd> puts away what was read. <kbd>F</kbd> turns full screen on and off, <kbd>Ctrl</kbd>+<kbd>Z</kbd> undoes, <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Z</kbd> redoes, and <kbd>Ctrl</kbd>+<kbd>Enter</kbd> presses Mermaidify. On a Mac, use <kbd>⌘</kbd> for <kbd>Ctrl</kbd>.</p>
+
+          <!--doc-pager-->
+        </div>
+      </div>
+    </main>
+    <!--site-footer:docs-->
+    <script type="module" src="/src/docs/main.ts"></script>
+  </body>
+</html>

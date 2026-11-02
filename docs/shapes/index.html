@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <!--doc-head-->
+    <!--site-head:docs-->
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to the content</a>
+    <!--site-header:docs-->
+    <main id="main">
+      <!--doc-hero-->
+      <div class="site-wrap page-body has-toc">
+        <!--doc-toc-->
+        <div class="doc">
+          <p>A shape is only a look. Mermaid gives no shape a meaning, and neither does mermaidify: every shape starts as a plain node, named by its place in the reading. Draw every step as a box if you like, or a diamond for something that is not a question. If your own work gives shapes meanings, the meanings are yours to keep.</p>
+
+          <h2 id="writes">What Mermaid writes</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>You draw</th><th>Mermaid writes</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>A box</td><td><code>A["Node 1"]</code></td></tr>
+                <tr><td>A box in a box</td><td><code>A[["Node 1"]]</code></td></tr>
+                <tr><td>A wide oval</td><td><code>A(["Node 1"])</code></td></tr>
+                <tr><td>A circle</td><td><code>A(("Node 1"))</code></td></tr>
+                <tr><td>A circle in a circle</td><td><code>A((("Node 1")))</code></td></tr>
+                <tr><td>A diamond</td><td><code>A{"Node 1"}</code></td></tr>
+                <tr><td>A hexagon</td><td><code>A{{"Node 1"}}</code></td></tr>
+                <tr><td>A trapezoid, wide at the bottom</td><td><code>A[/"Node 1"\]</code></td></tr>
+                <tr><td>A trapezoid, wide at the top</td><td><code>A[\"Node 1"/]</code></td></tr>
+                <tr><td>A parallelogram</td><td><code>A[/"Node 1"/]</code></td></tr>
+                <tr><td>A parallelogram leaning left</td><td><code>A[\"Node 1"\]</code></td></tr>
+                <tr><td>A triangle</td><td><code>A@{ shape: tri, label: "Node 1" }</code></td></tr>
+                <tr><td>A triangle pointing down</td><td><code>A@{ shape: flip-tri, label: "Node 1" }</code></td></tr>
+                <tr><td>A small shape filled in</td><td><code>A@{ shape: sm-circ, label: "Node 1" }</code></td></tr>
+                <tr><td>A small circle around a filled dot</td><td><code>A@{ shape: fr-circ, label: "Node 1" }</code></td></tr>
+                <tr><td>A shape around other shapes</td><td><code>subgraph G1 ["Group 1"]</code></td></tr>
+                <tr><td>An arrow, or a line with no head</td><td><code>A --&gt; B</code></td></tr>
+                <tr><td>Heads at both ends</td><td><code>A &lt;--&gt; B</code></td></tr>
+                <tr><td>A line drawn as dashes</td><td><code>A -.-&gt; B</code></td></tr>
+                <tr><td>A line gone over again</td><td><code>A ==&gt; B</code></td></tr>
+                <tr><td>A line you named</td><td><code>A --&gt;|"yes"| B</code></td></tr>
+                <tr><td>Green, blue, red, or amber ink</td><td><code>classDef</code>, <code>style</code>, <code>linkStyle</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>Mermaid draws a filled dot as a start and a ring around one as a stop, with no name; in a state diagram they are its start and its end, <code>[*]</code>. Triangles, filled dots, and rings around dots are written in Mermaid's newer shape syntax, which Mermaid 11.3 and later read; an older copy of Mermaid elsewhere will not draw them.</p>
+          <p>The example on the Draw page reads as this code, leaving out its colors:</p>
+          <div class="code" data-lang="mermaid"><pre><code>flowchart TD
+  A(["Node 1"])
+  B["Node 2"]
+  C{"Node 3"}
+  D((("Node 4")))
+  A --&gt; B
+  B --&gt; C
+  C --&gt; D
+  C --&gt; B</code></pre></div>
+
+          <h2 id="looks">Looks, styles, and names</h2>
+          <p>To change a shape's look or a line's style after reading it, pick another from its menu under <strong>Names</strong>: the code and the diagram follow, and the choice stays with that shape or line as you draw more.</p>
+          <p>Names are written with Mermaid's character codes, so a quote or an angle bracket in a name stays a character and does not break the code: <code>"Ready? #34;yes#34;"</code> shows as <em>Ready? "yes"</em>.</p>
+
+          <!--doc-pager-->
+        </div>
+      </div>
+    </main>
+    <!--site-footer:docs-->
+    <script type="module" src="/src/docs/main.ts"></script>
+  </body>
+</html>

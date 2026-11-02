@@ -1,0 +1,374 @@
+/*
+ * The header and the footer of every page, after grooph's site: a night bar with the mark, the links, and the theme
+ * menu, and the footer. src/site/chrome.ts writes the markup. The colors are tokens.css's variables.
+ */
+
+.site-wrap {
+  width: min(100% - 2 * var(--gutter), 1180px);
+  margin-inline: auto;
+}
+.site-header [hidden] {
+  display: none !important;
+}
+.site-header :focus-visible,
+.site-footer :focus-visible {
+  outline: 3px solid var(--bright);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── the header ─────────────────────────────────────────────────────────── */
+
+.site-header {
+  position: relative;
+  z-index: 10;
+  padding-top: env(safe-area-inset-top);
+  border-bottom: 1px solid oklch(1 0 0 / 0.07);
+  background: var(--night);
+  color: var(--night-ink);
+  font: 600 0.95rem/1.4 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+.site-header .site-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 20px;
+  min-height: 60px;
+}
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  margin: 0;
+  color: var(--night-ink);
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+.site-logo svg {
+  width: 32px;
+  height: 32px;
+}
+/* The mark: a mermaid and her bubbles in the theme's accent on a tile of the night. */
+.site-logo rect {
+  fill: var(--night-line);
+}
+.site-logo path {
+  fill: var(--bright);
+}
+.site-nav {
+  margin-left: auto;
+}
+.site-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-nav a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 12px;
+  border-radius: 8px;
+  color: var(--night-muted);
+  text-decoration: none;
+  transition:
+    color 150ms ease-out,
+    background-color 150ms ease-out;
+}
+.site-nav a[aria-current] {
+  background: oklch(1 0 0 / 0.1);
+  color: var(--night-ink);
+}
+.site-nav svg {
+  width: 14px;
+  height: 14px;
+}
+.site-menu-toggle,
+.site-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--night-line);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--night-ink);
+  font: inherit;
+  cursor: pointer;
+}
+.site-menu-toggle {
+  display: none;
+  margin-left: auto;
+  padding: 0 14px;
+}
+.site-menu-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* The theme menu: the site's look, kept in this browser. */
+.site-theme {
+  position: relative;
+  flex: none;
+}
+.site-theme-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--dot, var(--bright));
+  box-shadow: 0 0 0 1px oklch(1 0 0 / 0.3);
+}
+.site-theme-list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  z-index: 11;
+  display: grid;
+  gap: 2px;
+  min-width: 200px;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid var(--night-line);
+  border-radius: var(--radius-lg);
+  background: var(--night-2);
+  box-shadow: var(--shadow-night);
+  list-style: none;
+}
+.site-theme-list button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--night-ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.site-theme-list button svg {
+  width: 16px;
+  height: 16px;
+  margin-left: auto;
+  color: var(--bright);
+  visibility: hidden;
+}
+.site-theme-list button[aria-checked="true"] svg {
+  visibility: visible;
+}
+@media (hover: hover) {
+  .site-nav a:hover {
+    background: oklch(1 0 0 / 0.07);
+    color: var(--night-ink);
+  }
+  .site-theme-toggle:hover,
+  .site-theme-toggle[aria-expanded="true"],
+  .site-menu-toggle:hover,
+  .site-theme-list button:hover {
+    background: oklch(1 0 0 / 0.07);
+  }
+}
+/* Below 1024 px the theme switch shows only its dot. */
+@media (max-width: 1023px) {
+  .site-theme-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}
+/* Below 861 px the links fold under a Menu button. A page with no script has no button, and its links wrap instead. */
+@media (max-width: 860px) {
+  .site-header .site-wrap {
+    gap: 0 10px;
+  }
+  .site-nav {
+    flex-basis: 100%;
+    margin: 0 0 10px;
+  }
+  .has-menu .site-menu-toggle {
+    display: inline-flex;
+  }
+  .has-menu .site-nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    display: none;
+    margin: 0;
+    padding: 8px var(--gutter) 18px;
+    border-bottom: 1px solid var(--night-line);
+    background: var(--night);
+    box-shadow: var(--shadow-night);
+  }
+  .has-menu .site-nav.is-open {
+    display: block;
+  }
+  .has-menu .site-nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+  }
+  .has-menu .site-nav a {
+    min-height: 48px;
+    font-size: 1.02rem;
+  }
+}
+
+/* ─── the footer ─────────────────────────────────────────────────────────── */
+
+.site-footer {
+  padding: 56px 0 calc(40px + env(safe-area-inset-bottom));
+  background: var(--night);
+  color: var(--night-muted);
+  font: 400 0.94rem/1.6 var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+.site-footer .site-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) repeat(2, minmax(0, 1fr));
+  gap: 32px;
+}
+.site-footer .site-logo {
+  margin-bottom: 8px;
+}
+.site-footer p {
+  margin: 0;
+}
+.site-footer h2 {
+  margin: 0 0 10px;
+  color: var(--night-ink);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.site-footer ul {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.site-footer a {
+  color: var(--night-muted);
+  text-decoration: none;
+}
+.site-footer li a {
+  display: inline-block;
+  padding: 2px 0;
+}
+.site-credit {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding-top: 24px;
+  border-top: 1px solid var(--night-line);
+}
+.site-made {
+  color: var(--night-ink);
+  font-weight: 600;
+}
+.site-footer .site-made a {
+  color: var(--night-ink);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklch, var(--bright) 60%, transparent);
+  text-underline-offset: 0.2em;
+}
+.site-footer .site-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.site-footer .site-social a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 10px;
+  transition:
+    color 150ms ease-out,
+    background-color 150ms ease-out;
+}
+.site-social svg {
+  width: 19px;
+  height: 19px;
+}
+.site-footer .site-sponsor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-left: auto;
+  padding: 0 14px;
+  border: 1px solid var(--night-line);
+  border-radius: 999px;
+  color: var(--night-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.site-sponsor svg {
+  width: 17px;
+  height: 17px;
+  color: oklch(0.78 0.13 5);
+}
+.site-fine {
+  grid-column: 1 / -1;
+  font-size: 0.85rem;
+}
+.site-footer .site-fine a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+@media (hover: hover) {
+  .site-footer a:hover {
+    color: var(--night-ink);
+    text-decoration: underline;
+  }
+  .site-footer .site-social a:hover {
+    background: oklch(1 0 0 / 0.08);
+    text-decoration: none;
+  }
+  .site-footer .site-sponsor:hover {
+    border-color: var(--night-muted);
+    background: oklch(1 0 0 / 0.05);
+    text-decoration: none;
+  }
+}
+@media (max-width: 720px) {
+  .site-footer .site-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .site-footer .site-sponsor {
+    margin-left: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-nav a,
+  .site-footer .site-social a {
+    transition: none;
+  }
+}
+@media print {
+  .site-header,
+  .site-footer {
+    display: none;
+  }
+}
