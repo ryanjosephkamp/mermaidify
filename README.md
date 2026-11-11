@@ -73,7 +73,7 @@ The reader is one module with no dependencies, in [`src/reader/`](src/reader/ind
 ```ts
 import { recognize, toMermaid, toStateMermaid } from "./src/reader/index.ts";
 
-// A stroke is a list of [x, y] points, in CSS pixels or any unit near them, and the zoom it was drawn at, if not 100%.
+// A stroke is { pts: [[x, y], …], zoom? }: its points, in CSS pixels or any unit near them, and the zoom it was drawn at, if not 100%.
 const reading = recognize(strokes);
 reading.nodes; // [{ id: "A", kind: "rect", label: "Node 1", bb, strokes: [0], parent: null, ... }]
 reading.edges; // [{ id: "L1", from: "A", to: "B", both: false, assumed: false, style: "plain", ... }]
@@ -108,6 +108,7 @@ Then open [localhost:4371](http://localhost:4371/). `npm run build` writes the s
 ## Tests
 
 ```bash
+npx playwright install chromium  # once, before the browser tests
 npm test                     # the reader's unit tests
 npm run bench -- --floor     # the generated benchmark, held to its floor
 npm run measure -- --floor   # the 300 drawings people made, held to their floor
